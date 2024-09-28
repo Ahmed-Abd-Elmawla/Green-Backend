@@ -53,7 +53,8 @@ trait DeleteOldFiles
                 return null;
             }
 
-            return file_path($uploadPath, $value);
+            // return file_path($uploadPath, $value);
+            return $uploadPath . '/' . $value;
         }, $attributes);
 
         Storage::delete(array_filter($filesToDelete));

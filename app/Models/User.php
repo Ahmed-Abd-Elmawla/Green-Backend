@@ -3,6 +3,12 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Traits\HasUuid;
+use App\Traits\HasActive;
+use App\Traits\FileHandler;
+use App\Traits\UploadFiles;
+use Illuminate\Support\Str;
+use App\Traits\DeleteOldFiles;
 use Laravel\Sanctum\HasApiTokens;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 use Illuminate\Notifications\Notifiable;
@@ -15,17 +21,23 @@ class User extends Authenticatable implements JWTSubject
     use HasApiTokens,
         HasFactory,
         Notifiable,
-        SoftDeletes;
+        SoftDeletes,
+        HasActive,
+        HasUuid,
+        UploadFiles,
+        DeleteOldFiles,
+        FileHandler;
+
 
     /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
      */
-    protected $fillable = [
-        'name',
-        'email',
-        'password',
+    protected $guarded = [
+        'id',
+        'created_at',
+        'updated_at'
     ];
 
     /**
@@ -48,6 +60,27 @@ class User extends Authenticatable implements JWTSubject
         'password' => 'hashed',
     ];
 
+    protected $files = ['image'];
+
+    protected $deletableFiles = ['image'];
+
+    function uploadPath()
+    {
+        return config("base.user.uploads.img.path");
+    }
+
+    public function getImageAttribute($value)
+    {
+        if (!$value) {
+            $default_image_path = config('base.main.uploads.img.default');
+            return asset("/$default_image_path");
+        }
+        if (Str::startsWith($value, ['http', 'https'])) {
+            return $value;
+        }
+        return asset('storage/files/' . $this->uploadPath() . $value);
+    }
+
     public function getJWTIdentifier()
     {
         return $this->getKey();
@@ -56,5 +89,10 @@ class User extends Authenticatable implements JWTSubject
     public function getJWTCustomClaims()
     {
         return [];
+    }
+
+    public function getRouteKeyName()
+    {
+        return 'uuid';
     }
 }

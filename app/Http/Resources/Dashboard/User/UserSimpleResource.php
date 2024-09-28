@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Resources\Api\User\User;
+namespace App\Http\Resources\Dashboard\V1\User;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class SimpleUserResource extends JsonResource
+class UserSimpleResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,12 +16,9 @@ class SimpleUserResource extends JsonResource
     {
         return [
             'id' => $this->uuid,
-            // 'type' => $this->type,
             'name' => $this->name,
-            // 'username' => $this->username,
-            'email' => $this->email,
             'phone' => $this->phone,
-            'referral_code' => $this->referral_code,
+            'email' => $this->email,
         ];
     }
 }

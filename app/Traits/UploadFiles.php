@@ -65,26 +65,26 @@ trait UploadFiles
         return "{$onlyName[0]}_on_{$uniquePart}_@2024.{$extension}";
     }
 
-    protected static function deleteOldFiles($model, $updating = false)
-    {
-        $attributes = $model->deletableFiles ?? [];
+    // protected static function deleteOldFiles($model, $updating = false)
+    // {
+    //     $attributes = $model->deletableFiles ?? [];
 
-        if (
-            empty($attributes)
-            || !method_exists($model, 'uploadPath')
-            || is_null($uploadPath = $model->uploadPath())
-        ) {
-            return;
-        }
+    //     if (
+    //         empty($attributes)
+    //         || !method_exists($model, 'uploadPath')
+    //         || is_null($uploadPath = $model->uploadPath())
+    //     ) {
+    //         return;
+    //     }
 
-        $filesToDelete = array_map(function ($attribute) use ($model, $uploadPath, $updating) {
-            if (($updating && !$model->isDirty($attribute)) || is_null($value = $model->getOriginal($attribute))) {
-                return null;
-            }
+    //     $filesToDelete = array_map(function ($attribute) use ($model, $uploadPath, $updating) {
+    //         if (($updating && !$model->isDirty($attribute)) || is_null($value = $model->getOriginal($attribute))) {
+    //             return null;
+    //         }
 
-            return file_path($uploadPath, $value);
-        }, $attributes);
+    //         return file_path($uploadPath, $value);
+    //     }, $attributes);
 
-        Storage::delete(array_filter($filesToDelete));
-    }
+    //     Storage::delete(array_filter($filesToDelete));
+    // }
 }

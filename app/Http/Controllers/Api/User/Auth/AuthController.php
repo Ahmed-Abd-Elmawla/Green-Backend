@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Api\User\Auth;
 
 use App\Models\User;
 use App\Models\Device;
-use App\Mail\mailer;
+use App\Mail\Mailer;
 use App\Traits\Response;
 use Illuminate\Support\Facades\Mail;
 use App\Http\Controllers\Controller;

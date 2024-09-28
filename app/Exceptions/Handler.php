@@ -2,6 +2,7 @@
 
 namespace App\Exceptions;
 
+use Log;
 use Throwable;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
@@ -42,6 +43,11 @@ class Handler extends ExceptionHandler
         }
 
         if ($e instanceof NotFoundHttpException) {
+            // \Log::error('Route not found', [
+            //     'url' => $request->fullUrl(),
+            //     'method' => $request->method(),
+            //     'route' => $request->route() ? $request->route()->getName() : 'N/A'
+            // ]);
             return response()->json([
                 'status'    => 404,
                 'message'   => 'Route Not Found.',

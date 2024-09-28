@@ -1,12 +1,76 @@
 <?php
     return [
-        'slider' => [
-            'created_successfully' => 'Slider created successfully',
-            'updated_successfully' => 'Slider updated successfully',
-            'deleted_successfully' => 'Slider deleted successfully',
-            'enter_word' => 'Please enter a search word',
+        'layout' => [
+            'light' => 'Light',
+            'dark' => 'Dark',
+            'home' => 'Home',
+            'profile' => 'Profile',
+            'sign_out' => 'Sign Out',
+            'close' => 'Close',
+            'save' => 'Save',
+            'edit' => 'Edit',
+            'create'=>'Add New',
+            'actions'=>'Actions',
+            'edit_element' => 'Edit Element',
+            'delete_element' => 'Delete Element',
+            'confirm_delete' => 'Are you sure?',
+            'desc_delete' => "You won\'t be able to revert this!",
+            'yes_delete' => 'Yes, delete it',
+            'no_delete' => 'No, cancel',
+            'admins' => 'Admins',
+            'image' => 'Image',
+            'name' => 'Name',
+            'email' => 'Email',
+            'phone' => 'Phone Number',
+            'password' => 'Password',
+            'confirm_password' => 'Password Confirmation',
+            'successfully_deleted'=>'Successfully deleted',
+            'successfully_updated'=>'Successfully updated',
         ],
-        
+
+        'validation' => [
+            'inter_name' => 'Please enter a valid name(more than 2 letters)',
+            'inter_email' => 'Please enter a valid email',
+            'inter_phone' => 'Please enter a valid phone number',
+            'inter_password' => 'Please enter a valid password(more than 8 characters)',
+            'inter_confirm_password' => 'Passwords do not match',
+            'inter_image' => 'Choose an valid image',
+            'error' => 'Error',
+            'went_wrong' => 'Something went wrong',
+            'error_occurred' => 'An error occurred. Please try again later',
+            'update_person' => 'If you do not want to update password or image, leave them empty',
+        ],
+
+        'login' => [
+            'title' => 'Login',
+            'msg' => 'Sign in to start your session',
+            'email' => 'Email',
+            'password' => 'Password',
+            'forgot_password' => 'Forgot Password?',
+            'reset_password' => 'Reset Password',
+            'remember_me' => 'Remember me',
+            'sign_in' => 'Sign In',
+        ],
+
+        'admin' => [
+            'add' => 'Add Admin',
+            'update' => 'Update Admin',
+            'delete' => 'Delete Admin',
+            'successfully_created' => 'Admin created successfully',
+            'successfully_updated' => 'Admin updated successfully',
+            'successfully_deleted' => 'Admin deleted successfully',
+        ],
+
+        'representative' => [
+            'representative' => 'Representatives',
+            'add' => 'Add Representative',
+            'update' => 'Update Representative',
+            'delete' => 'Delete Representative',
+            'successfully_created' => 'Representative created successfully',
+            'successfully_updated' => 'Representative updated successfully',
+            'successfully_deleted' => 'Representative deleted successfully',
+        ],
+
         'city' => [
             'created_successfully' => 'City created successfully',
             'updated_successfully' => 'City updated successfully',
@@ -23,12 +87,6 @@
             'created_successfully' => 'Offer created successfully',
             'updated_successfully' => 'Offer updated successfully',
             'deleted_successfully' => 'Offer deleted successfully',
-        ],
-
-        'admin' => [
-            'created_successfully' => 'Admin profile created successfully',
-            'updated_successfully' => 'Admin profile updated successfully',
-            'deleted_successfully' => 'Admin profile deleted successfully',
         ],
 
         'branch' => [

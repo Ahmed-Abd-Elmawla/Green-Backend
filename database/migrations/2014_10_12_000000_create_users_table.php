@@ -29,7 +29,7 @@ return new class extends Migration
             $table->string('address')->nullable();
             $table->string('image')->nullable();
 
-            $table->boolean('is_active')->default(false);
+            $table->boolean('is_active')->default(true);
             $table->boolean('is_banned')->default(false);
             $table->rememberToken();
             $table->softDeletes();
