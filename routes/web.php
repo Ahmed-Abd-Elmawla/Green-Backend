@@ -40,7 +40,7 @@ Route::group(
 
 
 
-        Route::group(['prefix' => 'dashboard'], function () {
+        Route::group(['prefix' => 'dashboard','middleware' => 'auth'], function () {
             Route::get('/', [App\Http\Controllers\HomeController::class, 'dashboard'])->name('dashboard');
             Route::group(['prefix' => 'representatives'], function () {
                 Route::get('/', [UserController::class, 'index'])->name('representatives.index');;
@@ -51,8 +51,6 @@ Route::group(
 
             // Admins routs --------------------------------------------------------------------------------------------------------
             Route::group(['prefix' => 'admins'], function () {
-            // Route::group(['prefix' => 'admins'], function () {
-
                 Route::get('/', [AdminsController::class, 'index'])->name('admins.index');
                 Route::post('/store', [AdminsController::class, 'store'])->name('admins.store');
                 Route::post('/update/{admin}', [AdminsController::class, 'update'])->name('admins.updateInfo');
