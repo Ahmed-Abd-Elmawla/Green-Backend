@@ -21,8 +21,11 @@ return new class extends Migration
             $table->string('phone');
             $table->string('phone2')->nullable();
             $table->string('address')->nullable();
-            $table->decimal('lat')->nullable();
-            $table->decimal('long')->nullable();
+            $table->string('lat')->nullable();
+            $table->string('long')->nullable();
+            $table->float('dues')->default(0);
+            $table->float('balance')->default(0);
+            $table->float('net_account')->default(0);
             $table->timestamps();
         });
     }

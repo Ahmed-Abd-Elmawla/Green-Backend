@@ -19,6 +19,8 @@ class ClientRequest extends Master
             'phone'    => ['required','numeric','unique:App\Models\Client,phone'],
             'phone2'   => ['nullable','numeric','unique:App\Models\Client,phone'],
             'address'  => ['required','string', 'min:2','max:250'],
+            'lat'      => ['nullable', 'numeric'],
+            'long'     => ['nullable', 'numeric'],
         ];
     }
 }

@@ -22,6 +22,8 @@ class ClientsResource extends JsonResource
             'phone' => $this->phone,
             'phone2' => $this->phone2,
             'address' => $this->address,
+            'lat' => $this->lat,
+            'long' => $this->long,
             'created_at' => $this->created_at->format('Y-m-d H:i:s'),
         ];
     }
