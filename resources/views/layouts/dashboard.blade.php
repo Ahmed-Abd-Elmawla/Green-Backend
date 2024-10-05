@@ -31,6 +31,8 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jsvectormap@1.5.3/dist/css/jsvectormap.min.css"
         integrity="sha256-+uGLJmmTKOqBr+2E6KDYs/NRsHxSkONXFHUL0fy2O/4=" crossorigin="anonymous">
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
     <style>
         /* Fullscreen background for the spinner */
         .spinner-overlay {
@@ -80,20 +82,103 @@
             color: #ea868f;
         }
 
-        .custom-pagination li.active span{
+        .custom-pagination li.active span {
             background-color: #198754 !important;
             border-color: #198754 !important;
             color: #fff;
         }
 
-        .custom-pagination .page-item a{
-            color: #198754 !important;;
+        .custom-pagination .page-item a {
+            color: #198754 !important;
+            ;
         }
 
-        .custom-pagination .page-link{
+        .custom-pagination .page-link {
             border-radius: 0 !important;
         }
 
+
+        .info-modal img {
+            border-style: none;
+        }
+
+        .info-modal {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, auto));
+            justify-content: center;
+            align-items: center;
+            /* height: 100vh; */
+            text-align: center;
+        }
+
+        .info-modal {
+            padding: 1em;
+            border-radius: 0.8em;
+            /* background-color: #fefefe; */
+            box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.02),
+                0 6.7px 5.3px rgba(0, 0, 0, 0.028), 0 12.5px 10px rgba(0, 0, 0, 0.035),
+                0 22.3px 17.9px rgba(0, 0, 0, 0.042), 0 41.8px 33.4px rgba(0, 0, 0, 0.05),
+                0 100px 80px rgba(0, 0, 0, 0.07);
+            position: relative;
+        }
+
+        .info-modal .card__info {
+            margin: 1em 0;
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .info-modal .card__info li {
+            display: inline-block;
+            text-align: center;
+            padding: 0.5em;
+        }
+
+        .info-modal .card__info__stats {
+            color: var(--main-accent-color);
+            font-weight: bold;
+            font-size: 1.2em;
+            display: block;
+        }
+
+        .info-modal .card__info__stats+span {
+            color: #969798;
+            text-transform: uppercase;
+            font-size: 0.8em;
+            font-weight: bold;
+        }
+
+        .info-modal .card__text h2 {
+            margin-bottom: 0.3em;
+            font-size: 1.4em;
+            color: #6f6f6f;
+        }
+
+        .info-modal .card__text p {
+            margin: 0;
+            color: #999;
+            font-size: 0.95em;
+        }
+
+
+        @media (min-width: 425px) {
+            .info-modal .card {
+                padding: 3em;
+            }
+
+            .info-modal .card:after {
+                top: 50px;
+                right: 160px;
+            }
+
+            .info-modal .card__info li {
+                padding: 1em;
+            }
+
+            .info-modal .card__action__button {
+                padding: 0.9em 1.8em;
+            }
+        }
     </style>
 </head> <!--end::Head--> <!--begin::Body-->
 

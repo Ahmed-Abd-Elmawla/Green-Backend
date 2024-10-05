@@ -9,12 +9,14 @@
         <nav class="mt-2"> <!--begin::Sidebar Menu-->
             <ul class="nav sidebar-menu flex-column" data-lte-toggle="treeview" role="menu" data-accordion="false">
 
-                <li class="nav-item"> <a href="{{ route('dashboard') }}" class="nav-link {{ request()->routeIs('dashboard') ? 'active' : '' }}">
-                    <i class="nav-icon bi bi-house-check-fill"></i>
+                <li class="nav-item"> <a href="{{ route('dashboard') }}"
+                        class="nav-link {{ request()->routeIs('dashboard') ? 'active' : '' }}">
+                        <i class="nav-icon bi bi-house-check-fill"></i>
                         <p>{{ __('dashboard.layout.home') }}</p>
                     </a>
                 </li>
-                <li class="nav-item"> <a href="{{ route('admins.index') }}" class="nav-link {{ request()->routeIs('admins.index') ? 'active' : '' }}">
+                <li class="nav-item"> <a href="{{ route('admins.index') }}"
+                        class="nav-link {{ request()->routeIs('admins.index') ? 'active' : '' }}">
                         <i class="nav-icon bi bi-person-fill-check"></i>
                         <p>
                             {{ __('dashboard.layout.admins') }}
@@ -23,14 +25,62 @@
                     </a>
                 </li>
 
-                <li class="nav-item"> <a href="{{ route('representatives.index') }}" class="nav-link {{ request()->routeIs('representatives.index') ? 'active' : '' }}">
-                    <i class="nav-icon bi bi-people-fill"></i>
-                    <p>
-                        {{ __('dashboard.representative.representative') }}
-                        {{-- <i class="nav-arrow bi bi-chevron-right"></i> --}}
-                    </p>
-                </a>
-            </li>
+                <li class="nav-item"> <a href="{{ route('representatives.index') }}"
+                        class="nav-link {{ request()->routeIs('representatives.index') ? 'active' : '' }}">
+                        <i class="nav-icon fa-solid fa-users-gear"></i>
+                        <p>
+                            {{ __('dashboard.representative.representative') }}
+                            {{-- <i class="nav-arrow bi bi-chevron-right"></i> --}}
+                        </p>
+                    </a>
+                </li>
+
+                <li class="nav-item"> <a href="{{ route('clients.index') }}"
+                        class="nav-link {{ request()->routeIs('clients.index') ? 'active' : '' }}">
+                        <i class="nav-icon bi bi-person-vcard-fill"></i>
+                        <p>
+                            {{ __('dashboard.client.clients') }}
+                            {{-- <i class="nav-arrow bi bi-chevron-right"></i> --}}
+                        </p>
+                    </a>
+                </li>
+
+
+                <li
+                    class="nav-item {{ request()->routeIs('suppliers.index') || request()->routeIs('categories.index') || request()->routeIs('products.index') ? 'menu-open' : '' }}">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fa-solid fa-boxes-stacked"></i>
+                        <p>
+                            {{ __('dashboard.product.product_data') }}
+                            <i class="nav-arrow bi bi-chevron-right"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{ route('suppliers.index') }}"
+                                class="nav-link {{ request()->routeIs('suppliers.index') ? 'active' : '' }}">
+                                <i class="nav-icon fa-solid fa-truck-medical"></i>
+                                <p>{{ __('dashboard.supplier.supplier') }}</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('categories.index') }}"
+                                class="nav-link {{ request()->routeIs('categories.index') ? 'active' : '' }}">
+                                <i class="nav-icon fa-solid fa-tags"></i>
+                                <p>{{ __('dashboard.category.category') }}</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('products.index') }}"
+                                class="nav-link {{ request()->routeIs('products.index') ? 'active' : '' }}">
+                                <i class="nav-icon fa-solid fa-dolly"></i>
+                                <p>{{ __('dashboard.product.product') }}</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+
 
 
                 {{-- <li class="nav-item"> <a href="./generate/theme.html" class="nav-link"> <i

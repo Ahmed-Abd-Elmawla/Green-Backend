@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Dashboard\User;
 
 use App\Models\User;
-use App\Traits\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\Controller;
@@ -14,7 +13,7 @@ use App\Traits\ShowToast;
 
 class UserController extends Controller
 {
-    use Response, ShowToast;
+    use ShowToast;
 
     public function all_list(Request $request)
     {

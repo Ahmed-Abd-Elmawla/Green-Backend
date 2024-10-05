@@ -43,11 +43,11 @@ class Handler extends ExceptionHandler
         }
 
         if ($e instanceof NotFoundHttpException) {
-            // \Log::error('Route not found', [
-            //     'url' => $request->fullUrl(),
-            //     'method' => $request->method(),
-            //     'route' => $request->route() ? $request->route()->getName() : 'N/A'
-            // ]);
+            \Log::error('Route not found', [
+                'url' => $request->fullUrl(),
+                'method' => $request->method(),
+                'route' => $request->route() ? $request->route()->getName() : 'N/A'
+            ]);
             return response()->json([
                 'status'    => 404,
                 'message'   => 'Route Not Found.',

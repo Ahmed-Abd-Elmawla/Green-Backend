@@ -14,6 +14,19 @@ return [
             ],
         ],
     ],
+    'products' => [
+        'uploads' => [
+            'imgs' => [
+                'path' => 'uploads/products/imgs/',
+                'default' => 'default/product.jpg',
+                'image' => [
+                    'min_resolution' => 100,
+                    'store_resolution' => 150,
+                    'max_file_size_kb' => 5000,
+                ],
+            ],
+        ],
+    ],
     'images' => [
         'uploads' => [
             'img' => [

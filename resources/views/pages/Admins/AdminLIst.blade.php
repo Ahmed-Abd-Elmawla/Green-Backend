@@ -12,7 +12,7 @@
         <div class="card-body mt-3 mb-3">
             <!-- Button to trigger modal -->
             <button type="button" class="btn btn-outline-success rounded-0 float-end mb-2" data-bs-toggle="modal"
-                    onclick="openModal('create','/dashboard/admins')"><i
+                    onclick="openModal('create')"><i
                     class="bi bi-person-plus-fill m-1 ms-0"></i>
                 {{ __('dashboard.admin.add') }}
             </button>
@@ -43,7 +43,7 @@
                                 <div class="actions-cell">
                                     <a href="#" class="btn btn-link"
                                         data-bs-title="{{ __('dashboard.admin.update') }}"
-                                        onclick="openModal('edit','admins/update/{{ $admin->uuid }}',{{ json_encode($admin) }})">
+                                        onclick="openModal('edit',{{ json_encode($admin) }})">
                                         <i class="bi bi-pencil-square fs-4 text-info"></i>
                                     </a>
                                     <a href="#" class="btn btn-link"
@@ -192,7 +192,7 @@
             modalForm.reset();
         });
 
-        function openModal(type, action, data = null) {
+        function openModal(type, data = null) {
             var modal = new bootstrap.Modal(document.getElementById('EditCreateModal'));
             var modalTitle = document.getElementById('EditCreateModalLabel');
             var itemId = document.getElementById('itemId');

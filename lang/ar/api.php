@@ -139,5 +139,6 @@ return [
     'date_package_not_found' => 'هذا العنصر غير موجود',
     'not_auth_login' => 'من فضلك قم بتسجيل الدخول أولا',
     'failed_send_otp' => 'لم يتم ارسال رمز التحقق',
-    'not_found' => 'لا توجد بيانات',
+    'no_clients_found' => 'لا يوجد عملاء',
+    'success' => 'تم بنجاح',
 ];

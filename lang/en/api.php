@@ -139,5 +139,6 @@ return [
     'date_package_not_found' => 'This date package is not available',
     'not_auth_login' => 'Please login first',
     'failed_send_otp' => 'Failed to send otp',
-    'not_found' => 'NO data found',
+    'no_clients_found' => 'NO clients found',
+    'success' => 'Success',
 ];
