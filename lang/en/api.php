@@ -11,6 +11,10 @@ return [
         'your_account_have_been_banned'         => 'Your account have been banned',
         'wrong_email_or_password'               => 'Wrong email or password',
         'login_success'                         => 'Login success',
+        'token_not_found'                       => 'Token not found',
+        'token_is_valid'                        => 'Token is valid',
+        'token_has_expired'                     => 'Token has expired',
+        'token_is_invalid'                       => 'Token is invalid',
 
 
         'request_successfully'                  => 'Request successfully',
@@ -45,64 +49,13 @@ return [
         'user_not_found' => 'This user not found',
     ],
 
-    'order' => [
-        'used_voucher_before' => 'The user had previously used the voucher',
-        'cannot_use_voucher' => 'Cannot use this voucher',
-        'car_price_not_found_for_this_trip' => 'Car price not found for this trip',
-        'cannot_use_this_voucher_with_this_car' => 'Cannot use this voucher with this car',
-        'car_not_available_on_this_duration' => 'Car not available on this duration',
-        'is_save_btn_key_required' => 'Is save key required',
-        'order_dont_have_contracts' => 'Order dont have contracts',
-        'order_not_allowed_to_edit' => 'Order not allowed to edit',
-        'you_already_have_an_active_order' => 'You already have an active order',
-        'status' => [
-            'in_completed' => 'In Completed',
-            'confirmed' => 'Confirmed',
-            'paid' => 'Paid',
-            'apply_contract' => 'Apply Contract',
-            'in_progress' => 'In Progress',
-            'completed' => 'Completed',
-            'cancelled' => 'Cancelled',
-        ]
-    ],
-
-    'maintenance' => [
-        'added_successfully' => 'Maintenance added successfully',
-        'updated_successfully' => 'Maintenance updated successfully',
-        'deleted_successfully' => 'Maintenance deleted successfully',
-        'not_valid_maintenance_to_hold' => 'Not valid Maintenance to hold it',
-        'you_already_have_new_maintenance' => 'You already have new maintenance for this elevator',
-    ],
-
-    'notification' => [
-        'new_order' => 'New Order is created successfully',
-        'title_new_order' =>  'New Order',
-        'in_progress' => 'Driver start the trip',
-        'paid_order' => 'Order is paid successfully',
-        'title_paid_order' => 'Pay order',
-        'completed' => 'Driver end the trip',
-        'trip_points' => 'You got points from new trip',
-        'trip_points_achieve' => 'You achive the max point record',
-        'referral_points' => 'You got points from using your referall code',
-        'payment_confirmed' => 'Order payment done successfully',
-        'edit_order' => 'Order edited successfully',
-        'update_order' => 'Order updated successfully',
-        'title_update_order' => 'Update order',
-        'cancel_order' => 'Order canceled successfully',
-        'title_cancel_order' => 'Cancel order',
-        'user_canceled_order' => 'The user had canceled the order',
-        'user' => [
-            'assigned' => 'we assigned a driver for your trip',
-            'detail' => [
-                'assigned' => 'we assigned a driver :driver for your trip'
-            ]
-        ],
-        'driver' => [
-            'assigned' => 'You have been assigned to a trip',
-            'detail' => [
-                'assigned' => 'You have been assigned to a trip'
-            ]
-        ]
+    'invoice' => [
+        'not_enough_stock' => 'Not enough stock',
+        'client_not_found' => 'Client not found',
+        'successfully_created' => 'Invoice created successfully',
+        'collection_successfully_created' => 'Collection created successfully',
+        'expense_successfully_created' => 'Expense created successfully',
+        'invoice' => 'Invoice',
     ],
 
     'delete_success' => 'Deleted Successfully',
@@ -141,4 +94,5 @@ return [
     'failed_send_otp' => 'Failed to send otp',
     'no_clients_found' => 'NO clients found',
     'success' => 'Success',
+    'collection' => 'Collection',
 ];

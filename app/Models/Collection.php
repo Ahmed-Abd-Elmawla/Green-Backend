@@ -6,10 +6,10 @@ use App\Traits\HasUuid;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Client extends Model
+class Collection extends Model
 {
     use HasFactory,
-    HasUuid;
+        HasUuid;
 
     protected $guarded = [
         'id',
@@ -17,19 +17,14 @@ class Client extends Model
         'updated_at'
     ];
 
+    public function client()
+    {
+        return $this->belongsTo(Client::class, 'client_id');
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id');
-    }
-
-        public function invoices()
-    {
-        return $this->hasMany(Invoice::class);
-    }
-
-    public function collections()
-    {
-        return $this->hasMany(Collection::class);
     }
 
     public function getRouteKeyName()

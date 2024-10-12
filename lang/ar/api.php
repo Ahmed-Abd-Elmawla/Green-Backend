@@ -12,6 +12,10 @@ return [
         'your_account_have_been_banned'         => 'تم حظر حسابك',
         'wrong_email_or_password'               => 'الإيميل أو كلمة المرور خاطئ',
         'login_success'                         => 'تم تسجيل الدخول بنجاح',
+        'token_not_found'                       => 'الرمز غير موجود',
+        'token_is_valid'                        => 'الرمز صالح',
+        'token_has_expired'                     => 'الرمز منتهي',
+        'token_is_invalid'                      => 'الرمز غير صالح',
 
 
         'request_successfully'                  => 'تم الطلب بنجاح',
@@ -64,26 +68,15 @@ return [
     'read_success' => 'تمت القراءة بنجاح',
     'added_success' => 'تمت الإضافة بنجاح',
 
-    'order' => [
-        'used_voucher_before' => 'المستخدم قد استخدم القسيمة من قبل',
-        'cannot_use_voucher' => 'لا يمكن استخدام هذه القسيمة',
-        'car_price_not_found_for_this_trip' => 'لا يوجد سعر للسيارة في هذا الرحلة',
-        'cannot_use_this_voucher_with_this_car' => 'لا يمكن استخدام هذه القسيمة مع هذه السيارة',
-        'car_not_available_on_this_duration'    => 'السيارة غير متوفرة في الوقت المحدد',
-        'is_save_btn_key_required' => 'Is save key required',
-        'order_dont_have_contracts' => 'لا يوجد عقود لهذا الطلب',
-        'order_not_allowed_to_edit' => 'غير مسموح بتعديل هذا الطلب',
-        'you_already_have_an_active_order' => 'انت لديك اوردر بالفعل',
-        'status' => [
-            'in_completed' => 'غير مكتمل',
-            'confirmed' => 'مؤكد',
-            'paid' => 'مدفوع',
-            'apply_contract' => 'تقديم عقد',
-            'in_progress' => 'قيد التنفيذ',
-            'completed' => 'مكتمل',
-            'cancelled' => 'ملغي',
-        ]
+    'invoice' => [
+        'not_enough_stock' => 'لا يوجد مخزون كافي لاحد المنتجات',
+        'client_not_found' => 'لم يتم العثور على هذا العميل',
+        'successfully_created' => 'تم إنشاء الفاتورة بنجاح',
+        'collection_successfully_created' => 'تم إنشاء التحصيل بنجاح',
+        'expense_successfully_created' => 'تم إنشاء الصرف بنجاح',
+        'invoice' => 'فاتورة',
     ],
+
     'notification' => [
         'new_order' => 'تم تسجيل طلب جديد بنجاح',
         'title_new_order' => 'طلب جديد',
@@ -141,4 +134,6 @@ return [
     'failed_send_otp' => 'لم يتم ارسال رمز التحقق',
     'no_clients_found' => 'لا يوجد عملاء',
     'success' => 'تم بنجاح',
+    'collection' => 'تحصيل',
+
 ];

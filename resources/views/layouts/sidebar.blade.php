@@ -80,14 +80,37 @@
                     </ul>
                 </li>
 
+                <li class="nav-item"> <a href="{{ route('invoices.index') }}"
+                        class="nav-link {{ request()->routeIs('invoices.index') ? 'active' : '' }}">
+                        <i class="nav-icon fa-solid fa-file-invoice"></i>
+                        <p>
+                            {{ __('dashboard.invoice.invoices') }}
+                        </p>
+                    </a>
+                </li>
+
+                <li class="nav-item"> <a href="{{ route('collections.index') }}"
+                        class="nav-link {{ request()->routeIs('collections.index') ? 'active' : '' }}">
+                        <i class="nav-icon fa-solid fa-file-invoice-dollar"></i>
+                        <p>
+                            {{ __('dashboard.collection.collections') }}
+                        </p>
+                    </a>
+                </li>
+
+                <li class="nav-item"> <a href="{{ route('expenses.index') }}"
+                        class="nav-link {{ request()->routeIs('expenses.index') ? 'active' : '' }}">
+                        <i class="nav-icon fa-solid fa-hand-holding-dollar"></i>
+                        <p>
+                            {{ __('dashboard.expense.expenses') }}
+                        </p>
+                    </a>
+                </li>
 
 
 
-                {{-- <li class="nav-item"> <a href="./generate/theme.html" class="nav-link"> <i
-                            class="nav-icon bi bi-palette"></i>
-                        <p>Theme Generate</p>
-                    </a> </li>
-                <li class="nav-item"> <a href="#" class="nav-link"> <i class="nav-icon bi bi-box-seam-fill"></i>
+
+                {{-- <li class="nav-item"> <a href="#" class="nav-link"> <i class="nav-icon bi bi-box-seam-fill"></i>
                         <p>
                             Widgets
                             <i class="nav-arrow bi bi-chevron-right"></i>

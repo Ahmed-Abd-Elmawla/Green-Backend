@@ -24,6 +24,9 @@ class ClientsResource extends JsonResource
             'address' => $this->address,
             'lat' => $this->lat,
             'long' => $this->long,
+            'dues' => $this->dues,
+            'balance' => $this->balance,
+            'net_account' => $this->net_account,
             'created_at' => $this->created_at->format('Y-m-d H:i:s'),
         ];
     }

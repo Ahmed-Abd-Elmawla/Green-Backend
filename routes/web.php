@@ -7,9 +7,12 @@ use App\Http\Controllers\Dashboard\Auth\LoginController;
 use App\Http\Controllers\Dashboard\Admins\AdminsController;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use App\Http\Controllers\Dashboard\Clients\ClientsController;
+use App\Http\Controllers\Dashboard\Expenses\ExpensesController;
+use App\Http\Controllers\Dashboard\Invoices\InvoicesController;
 use App\Http\Controllers\Dashboard\Products\ProductsController;
 use App\Http\Controllers\Dashboard\Suppliers\SuppliersController;
 use App\Http\Controllers\Dashboard\Categories\CategoriesController;
+use App\Http\Controllers\Dashboard\Collections\CollectionsController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -92,6 +95,24 @@ Route::group(
                 Route::post('/store', [ProductsController::class, 'store'])->name('products.store');
                 Route::post('/update/{product}', [ProductsController::class, 'update'])->name('products.update');
                 Route::delete('/{product}', [ProductsController::class, 'destroy'])->name('products.delete');
+            });
+
+            // Invoices routs ---------------------------------------------------------------------------------------------------------
+            Route::group(['prefix' => 'invoices'], function () {
+                Route::get('/', [InvoicesController::class, 'index'])->name('invoices.index');
+                Route::delete('/{invoice}', [InvoicesController::class, 'destroy'])->name('invoices.delete');
+            });
+
+            // Collections routs ---------------------------------------------------------------------------------------------------------
+            Route::group(['prefix' => 'collections'], function () {
+                Route::get('/', [CollectionsController::class, 'index'])->name('collections.index');
+                Route::delete('/{collection}', [CollectionsController::class, 'destroy'])->name('collections.delete');
+            });
+
+            // Expenses routs ---------------------------------------------------------------------------------------------------------
+            Route::group(['prefix' => 'expenses'], function () {
+                Route::get('/', [ExpensesController::class, 'index'])->name('expenses.index');
+                Route::delete('/{expense}', [ExpensesController::class, 'destroy'])->name('expenses.delete');
             });
         });
     }

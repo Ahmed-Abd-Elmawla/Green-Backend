@@ -66,6 +66,13 @@ class Product extends Model
         return $this->belongsTo(Category::class, 'category_id');
     }
 
+    public function invoices()
+    {
+        return $this->belongsToMany(Invoice::class, 'invoice_product')
+                    ->withPivot('quantity', 'price')
+                    ->withTimestamps();
+    }
+
     public function getRouteKeyName()
     {
         return 'uuid';

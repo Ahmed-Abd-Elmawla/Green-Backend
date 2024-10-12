@@ -2,16 +2,20 @@
 
 namespace App\Http\Controllers\Api\User\Auth;
 
+use App\Mail\Mailer;
 use App\Models\User;
 use App\Models\Device;
-use App\Mail\Mailer;
 use App\Traits\Response;
-use Illuminate\Support\Facades\Mail;
+use Illuminate\Http\Request;
+use Tymon\JWTAuth\Facades\JWTAuth;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Mail;
 use App\Http\Requests\Api\User\Auth\Login;
+use Tymon\JWTAuth\Exceptions\JWTException;
 use App\Http\Requests\Api\User\Auth\SendOtp;
 use App\Http\Requests\Api\User\Auth\VerifyPhone;
 use App\Http\Requests\Api\User\Auth\UpdatePassword;
+use Tymon\JWTAuth\Exceptions\TokenExpiredException;
 use App\Http\Resources\Api\User\User\ProfileResource;
 
 class AuthController extends Controller
@@ -25,17 +29,14 @@ class AuthController extends Controller
         $user = User::where(['email' => $request->email])->first();
 
         if (!$user) {
-            // return response()->json(['status' => 401, 'message' =>  __('api.auth.provided_email_not_found'), 'data' => null], 401);
             return $this->sendResponse(401, __('api.auth.provided_email_not_found'), null, 401);
         }
 
         if (!$user->is_active) {
-            // return response()->json(['status' => 422, 'message' => __('api.auth.your_account_deactivated'), 'data' => null], 422);
             return $this->sendResponse(422, __('api.auth.your_account_deactivated'), null, 422);
         }
 
         if ($user->is_banned) {
-            // return response()->json(['status' => 405, 'message' => __('api.auth.your_account_have_been_banned'), 'data' => null], 405);
             return $this->sendResponse(405, __('api.auth.your_account_have_been_banned'), null, 405);
         }
 
@@ -49,7 +50,6 @@ class AuthController extends Controller
         Mail::to($email)->send(new mailer($data));
         // Update user's OTP
         $user->update(['otp' => $otp]);
-        // return response()->json(['status' => 200, 'message' =>  __('api.auth.otp_sent_successfully'), 'data' => null]);
         return $this->sendResponse(200, __('api.auth.otp_sent_successfully'), null, 200);
     }
 
@@ -58,7 +58,6 @@ class AuthController extends Controller
         $user = User::where(['email' => $request->email])->first();
 
         if (!$user) {
-            // return response()->json(['status' => 422, 'message' => __('api.auth.provided_email_not_found'), 'data' => null], 422);
             return $this->sendResponse(422, __('api.auth.provided_email_not_found'), null, 422);
         }
 
@@ -70,19 +69,16 @@ class AuthController extends Controller
         // Attempt user login
         $token = auth('user')->attempt(['email' => $request->email, 'password' => $request->password]);
         if (!$token) {
-            // return response()->json(['status' => 401, 'message' => __('api.auth.wrong_email_or_password'), 'data' => null], 401);
             return $this->sendResponse(401, __('api.auth.wrong_email_or_password'), null, 401);
         }
 
         $user = auth('user')->user();
 
         if (!$user->is_active) {
-            // return response()->json(['status' => 422, 'message' => __('api.auth.your_account_deactivated'), 'data' => null], 422);
             return $this->sendResponse(422, __('api.auth.your_account_deactivated'), null, 422);
         }
 
         if ($user->is_banned) {
-            // return response()->json(['status' => 405, 'message' => __('api.auth.your_account_have_been_banned'), 'data' => null], 405);
             return $this->sendResponse(405, __('api.auth.your_account_have_been_banned'), null, 405);
         }
 
@@ -97,7 +93,6 @@ class AuthController extends Controller
 
         $this->setUserToken($user, $token);
 
-        // return response()->json(['status' => 200, 'message' => __('api.auth.login_success'), 'data' => ProfileResource::make($user)]);
         return $this->sendResponse(200, __('api.auth.login_success'), ProfileResource::make($user), 200);
     }
 
@@ -107,12 +102,10 @@ class AuthController extends Controller
         $user = User::where(['email' => $request->email])->first();
 
         if (!$user) {
-            // return response()->json(['status' => 401, 'message' =>  __('api.auth.provided_email_not_found'), 'data' => null], 401);
             return $this->sendResponse(401, __('api.auth.provided_email_not_found'), null, 401);
         }
 
         if ($user->otp == null || $user->otp !== $request->otp) {
-            // return response()->json(['status' => 401, 'message' => __('api.auth.incorrect_otp'), 'data' => null], 401);
             return $this->sendResponse(401, __('api.auth.incorrect_otp'), null, 401);
         }
 
@@ -121,7 +114,6 @@ class AuthController extends Controller
             // 'phone_confirmed ' => true,
         // ]);
 
-        // return response()->json(['status' => 200, 'message' => __('api.auth.OTP_Correct'), 'data' => null]);
         return $this->sendResponse(200, __('api.auth.OTP_Correct'), null, 200);
     }
 
@@ -131,15 +123,12 @@ class AuthController extends Controller
         $user = User::where(['email' => $request->email,])->first();
 
         if ($user->otp !== $request->otp) {
-            // return response()->json(['status' => 422, 'message' => __('api.auth.incorrect_otp'), 'data' => null], 422);
             return $this->sendResponse(422, __('api.auth.incorrect_otp'), null, 422);
         }
 
         // Update user's password and clear the forget password code
         $user->update(['password' => $request->password, 'otp' => null]);
 
-        // Respond with success message
-        // return response()->json(['status' => 200, 'message' => __('api.auth.password_updated_successfully'), 'data' => null]);
         return $this->sendResponse(200, __('api.auth.password_updated_successfully'), null, 200);
     }
 
@@ -153,13 +142,30 @@ class AuthController extends Controller
         $user = auth('user');
 
         if (!$user) {
-            // return response()->json(['status' => 422, 'message' => __('api.auth.provided_email_not_found'), 'data' => null], 422);
             return $this->sendResponse(422, __('api.auth.provided_email_not_found'), null, 422);
         }
 
         $user->logout();
 
-        // return response()->json(['status' => 200, 'message' => __('api.auth.log_out_success'), 'data' => null]);
         return $this->sendResponse(200, __('api.auth.log_out_success'), null, 200);
     }
+
+    function isTokenExpired(Request $request)
+{
+    try {
+        $token = $request->bearerToken();
+
+        if (!$token) {
+            return $this->sendResponse(422, __('api.auth.token_not_found'), null, 422);
+        }
+
+        $payload = JWTAuth::setToken($token)->getPayload();
+
+        return $this->sendResponse(200, __('api.auth.token_is_valid'), null, 200);
+    } catch (TokenExpiredException $e) {
+        return $this->sendResponse(401, __('api.auth.token_has_expired'), null, 401);
+    } catch (JWTException $e) {
+        return $this->sendResponse(400, __('api.auth.token_is_invalid'), null, 400);
+    }
+}
 }

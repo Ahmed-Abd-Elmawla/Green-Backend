@@ -39,6 +39,24 @@ return [
         'milliliter' =>'Milliliter',
         'package' =>'Package',
         'carton' =>'Carton',
+        'dues' =>'Dues',
+        'balance' =>'Balance',
+        'net_account' =>'Net Account',
+        'code' =>'Code',
+        'payment_type' =>'Payment Type',
+        'total_amount' =>'Total Amount',
+        'paid' =>'Paid',
+        'remaining' =>'Remaining',
+        'date' =>'Date',
+        'client_name' =>'Client Name',
+        'invoice_info' =>'Invoice Information',
+        'client_info' =>'Client Information',
+        'representative_info' =>'Representative Information',
+        'representative_name' =>'Name',
+        'quantity' =>'Quantity',
+        'cash' =>'Cash',
+        'postpaid' =>'Postpaid',
+        'amount' =>'Amount',
     ],
 
     'validation' => [
@@ -134,6 +152,29 @@ return [
         'successfully_updated' => 'Product updated successfully',
         'successfully_deleted' => 'Product deleted successfully',
         'no_offers' => 'No offers',
+    ],
+
+    'invoice' => [
+        'invoices' => 'Invoices',
+        'show' => 'Show Invoice',
+        'info' => 'Invoice Information',
+        'delete' => 'Delete Invoice',
+        'successfully_deleted' => 'Invoice deleted successfully',
+    ],
+
+    'collection' => [
+        'collections' => 'Collections',
+        'show' => 'Show Collection',
+        'info' => 'Collection Information',
+        'delete' => 'Delete Collection',
+        'successfully_deleted' => 'Collection deleted successfully',
+    ],
+
+    'expense' => [
+        'expenses' => 'Expenses',
+        'show' => 'Show representative',
+        'delete' => 'Delete Expense',
+        'successfully_deleted' => 'Expense deleted successfully',
     ],
 
     'city' => [

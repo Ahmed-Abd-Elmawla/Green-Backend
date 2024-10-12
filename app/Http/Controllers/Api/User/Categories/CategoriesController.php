@@ -3,14 +3,13 @@
 namespace App\Http\Controllers\Api\User\Categories;
 
 
+use App\Models\Product;
 use App\Models\Category;
 use App\Traits\Response;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Http\Resources\Api\User\Categories\CategoriesResource;
+use App\Http\Resources\Api\User\Products\ProductsResource;
 use App\Http\Resources\Api\User\Categories\CategoriesMiniResource;
-
-use function PHPUnit\Framework\isEmpty;
 
 class CategoriesController extends Controller
 {
@@ -26,8 +25,11 @@ class CategoriesController extends Controller
 
     public function show($id)
     {
-        $category = Category::whereUuid($id)->with('products')->first();
-        $categoryData = new CategoriesResource($category);
-        return $this->sendResponse(200, __('api.success'), $categoryData, 200);
+        $category = Category::whereUuid($id)->first();
+        $products = Product::where('category_id', $category->id)->latest()->paginate(10);
+        return ProductsResource::collection($products)->additional([
+            'status' => 200,
+            'message' =>  __('api.success'),
+        ]);
     }
 }

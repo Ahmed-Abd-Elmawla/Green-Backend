@@ -39,6 +39,24 @@ return [
         'milliliter' =>'ميليلتر',
         'package' =>'عبوة',
         'carton' =>'كرتونة',
+        'dues' =>'المستحقات',
+        'balance' =>'الرصيد',
+        'net_account' =>'صافي الحساب',
+        'code' =>'الكود',
+        'payment_type' =>'نوع الدفع',
+        'total_amount' =>'القيمة الكلية',
+        'paid' =>'مدفوع',
+        'remaining' =>'متبقي',
+        'date' =>'التاريخ',
+        'client_name' =>'إسم العميل',
+        'invoice_info' =>'تفاصيل الفاتورة',
+        'client_info' =>'تفاصيل العميل',
+        'representative_info' =>'تفاصيل المندوب',
+        'representative_name' =>'إسم المندوب',
+        'quantity' =>'الكمية',
+        'cash' =>'نقدي',
+        'postpaid' =>'آجل',
+        'amount' =>'القيمة',
     ],
 
     'validation' => [
@@ -134,6 +152,29 @@ return [
         'successfully_updated' => 'تم تحديث المنتج بنجاح',
         'successfully_deleted' => 'تم حذف المنتج بنجاح',
         'no_offers' => 'لا عروض',
+    ],
+
+    'invoice' => [
+        'invoices' => 'الفواتير',
+        'show' => 'عرض الفاتورة',
+        'info' => 'بيانات الفاتورة',
+        'delete' => 'حذف الفاتورة',
+        'successfully_deleted' => 'تم حذف الفاتورة بنجاح',
+    ],
+
+    'collection' => [
+        'collections' => 'التحصيلات',
+        'show' => 'عرض التحصيل',
+        'info' => 'بيانات التحصيل',
+        'delete' => 'حذف التحصيل',
+        'successfully_deleted' => 'تم حذف التحصيل بنجاح',
+    ],
+
+    'expense' => [
+        'expenses' => 'المصروفات',
+        'show' => 'عرض المندوب',
+        'delete' => 'حذف الصرف',
+        'successfully_deleted' => 'تم حذف الصرف بنجاح',
     ],
 
     'city' => [

@@ -96,6 +96,21 @@ class User extends Authenticatable implements JWTSubject
         return $this->hasMany(Client::class);
     }
 
+    public function invoices()
+    {
+        return $this->hasMany(Invoice::class);
+    }
+
+    public function collections()
+    {
+        return $this->hasMany(Collection::class);
+    }
+
+    public function expenses()
+    {
+        return $this->hasMany(Expense::class);
+    }
+
     public function getRouteKeyName()
     {
         return 'uuid';

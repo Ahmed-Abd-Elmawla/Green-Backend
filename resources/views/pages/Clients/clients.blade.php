@@ -25,6 +25,9 @@
                         <th scope="col">{{ __('dashboard.layout.phone') }}</th>
                         <th scope="col">{{ __('dashboard.layout.phone2') }}</th>
                         <th scope="col">{{ __('dashboard.layout.address') }}</th>
+                        <th scope="col">{{ __('dashboard.layout.dues') }}</th>
+                        <th scope="col">{{ __('dashboard.layout.balance') }}</th>
+                        <th scope="col">{{ __('dashboard.layout.net_account') }}</th>
                         <th scope="col">{{ __('dashboard.layout.representative') }}</th>
                         <th style="width:108px">{{ __('dashboard.layout.actions') }}</th>
                     </tr>
@@ -38,6 +41,9 @@
                             <td>{{ $client->phone }}</td>
                             <td>{{ $client->phone2 }}</td>
                             <td>{{ $client->address }}</td>
+                            <td>{{ $client->dues }}</td>
+                            <td>{{ $client->balance }}</td>
+                            <td>{{ $client->net_account }}</td>
                             <td class="p-0">
                                 <div class="actions-cell">
                                     <a href="#" class="btn btn-link"
