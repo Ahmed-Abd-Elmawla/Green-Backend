@@ -6,11 +6,11 @@ namespace App\Http\Controllers\Api\User\Clients;
 use App\Models\Client;
 use App\Traits\Response;
 use Illuminate\Http\Request;
+use App\Helpers\sendNotification;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\User\Clients\ClientRequest;
 use App\Http\Resources\Api\User\Clients\ClientsResource;
-
-use function PHPUnit\Framework\isEmpty;
+use App\Http\Resources\Api\User\Clients\ClientsMiniResource;
 
 class ClientsController extends Controller
 {
@@ -24,6 +24,14 @@ class ClientsController extends Controller
             })->get();
 
         $data = ClientsResource::collection($clients);
+        return $this->sendResponse(200, __('api.success'), $data, 200);
+    }
+
+    public function miniIndex()
+    {
+        $clients = Client::whereUserId(auth('user')->user()->id)->get();
+
+        $data = ClientsMiniResource::collection($clients);
         return $this->sendResponse(200, __('api.success'), $data, 200);
     }
 
@@ -41,6 +49,7 @@ class ClientsController extends Controller
         }
         $data['user_id'] = $user->id;
         Client::create($data);
+        sendNotification::newClientNotify();
         return $this->sendResponse(200, __('api.added_success'), null, 200);
     }
 }

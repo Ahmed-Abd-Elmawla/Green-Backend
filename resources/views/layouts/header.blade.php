@@ -14,14 +14,13 @@
             <li class="nav-item"> <a class="nav-link" data-widget="navbar-search" href="#" role="button">
                     {{-- <i class="bi bi-search"></i> --}}
                 </a> </li>
-                    <!--end::Navbar Search-->
+            <!--end::Navbar Search-->
             <!--begin::Messages Dropdown Menu-->
 
 
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item dropdown">
-                    <button
-                        class="btn btn-link nav-link py-2 px-0 px-lg-2 dropdown-toggle d-flex align-items-center"
+                    <button class="btn btn-link nav-link py-2 px-0 px-lg-2 dropdown-toggle d-flex align-items-center"
                         id="language-selector" type="button" aria-expanded="false" data-bs-toggle="dropdown"
                         data-bs-display="static">
                         <span class="language-icon-active">
@@ -38,9 +37,10 @@
                         @foreach (LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
                             <li>
                                 <a class="dropdown-item d-flex align-items-center" rel="alternate"
-                                   hreflang="{{ $localeCode }}"
-                                   href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">
-                                    <img src="{{ asset('assets/images/' . $localeCode . '-flag.png') }}" width="24px" alt="{{ $properties['native'] }} Flag" class="me-2">
+                                    hreflang="{{ $localeCode }}"
+                                    href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">
+                                    <img src="{{ asset('assets/images/' . $localeCode . '-flag.png') }}" width="24px"
+                                        alt="{{ $properties['native'] }} Flag" class="me-2">
                                     {{ $properties['native'] }}
                                 </a>
                             </li>
@@ -55,8 +55,7 @@
 
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item dropdown">
-                    <button
-                        class="btn btn-link nav-link py-2 px-0 px-lg-2 dropdown-toggle d-flex align-items-center"
+                    <button class="btn btn-link nav-link py-2 px-0 px-lg-2 dropdown-toggle d-flex align-items-center"
                         id="bd-theme" type="button" aria-expanded="false" data-bs-toggle="dropdown"
                         data-bs-display="static">
                         <span class="theme-icon-active">
@@ -72,7 +71,7 @@
                             <button type="button" class="dropdown-item d-flex align-items-center active"
                                 data-bs-theme-value="light" aria-pressed="false">
                                 <i class="bi bi-sun-fill me-2"></i>
-                                {{__('dashboard.layout.light')}}
+                                {{ __('dashboard.layout.light') }}
                                 <i class="bi bi-check-lg ms-auto d-none"></i>
                             </button>
                         </li>
@@ -80,7 +79,7 @@
                             <button type="button" class="dropdown-item d-flex align-items-center"
                                 data-bs-theme-value="dark" aria-pressed="false">
                                 <i class="bi bi-moon-fill me-2"></i>
-                                {{__('dashboard.layout.dark')}}
+                                {{ __('dashboard.layout.dark') }}
                                 <i class="bi bi-check-lg ms-auto d-none"></i>
                             </button>
                         </li>
@@ -168,44 +167,48 @@
 
             <!--begin::Notifications Dropdown Menu-->
             <li class="nav-item dropdown"> <a class="nav-link" data-bs-toggle="dropdown" href="#"> <i
-                        class="bi bi-bell-fill"></i> <span
-                        class="navbar-badge badge text-bg-danger"><strong>15</strong></span></a>
-                <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end"> <span
-                        class="dropdown-item dropdown-header">15 Notifications</span>
-                    <div class="dropdown-divider"></div> <a href="#" class="dropdown-item"> <i
-                            class="bi bi-envelope me-2"></i> 4 new messages
-                        <span class="float-end text-secondary fs-7">3 mins</span> </a>
-                    <div class="dropdown-divider"></div> <a href="#" class="dropdown-item"> <i
-                            class="bi bi-people-fill me-2"></i> 8 friend requests
-                        <span class="float-end text-secondary fs-7">12 hours</span> </a>
-                    <div class="dropdown-divider"></div> <a href="#" class="dropdown-item"> <i
-                            class="bi bi-file-earmark-fill me-2"></i> 3 new reports
-                        <span class="float-end text-secondary fs-7">2 days</span> </a>
-                    <div class="dropdown-divider"></div> <a href="#"
-                        class="dropdown-item dropdown-footer">
-                        See All Notifications
-                    </a>
+                        class="bi bi-bell-fill"></i>
+                    @if (auth()->user()->unreadNotifications->count() > 0)
+                        <span class="navbar-badge badge text-bg-danger"><strong>{{ auth()->user()->unreadNotifications->count() }}</strong></span>
+                    @endif
+                </a>
+                <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end">
+                    @if (auth()->user()->unreadNotifications->count() == 0)
+                        <span class="dropdown-item dropdown-header">{{ __('dashboard.notification.no_notify') }}</span>
+                    @else
+                        <span class="dropdown-item dropdown-header">{{ auth()->user()->unreadNotifications->count() }}
+                            {{ __('dashboard.notification.notification') }}</span>
+
+                        @foreach (auth()->user()->unreadNotifications as $notification)
+                            <div class="dropdown-divider"></div>
+                            <a href="{{ $notification->data['url'] }}" class="dropdown-item">
+                                <i class="{{ $notification->data['icon'] }} me-2"></i> {{ __($notification->data['message']) }}
+                            </a>
+                        @endforeach
+
+                        <div class="dropdown-divider"></div> <a href="{{ route('markAsRead', auth()->user()->id) }}" class="dropdown-item dropdown-footer">
+                            {{ __('dashboard.notification.mark_as_read') }}
+                        </a>
+                    @endif
                 </div>
             </li> <!--end::Notifications Dropdown Menu--> <!--begin::Fullscreen Toggle-->
             <li class="nav-item"> <a class="nav-link" href="#" data-lte-toggle="fullscreen"> <i
-                        data-lte-icon="maximize" class="bi bi-arrows-fullscreen"></i> <i
-                        data-lte-icon="minimize" class="bi bi-fullscreen-exit" style="display: none;"></i>
+                        data-lte-icon="maximize" class="bi bi-arrows-fullscreen"></i> <i data-lte-icon="minimize"
+                        class="bi bi-fullscreen-exit" style="display: none;"></i>
                 </a> </li> <!--end::Fullscreen Toggle--> <!--begin::User Menu Dropdown-->
             <li class="nav-item dropdown user-menu"> <a href="#" class="nav-link dropdown-toggle"
-                    data-bs-toggle="dropdown"> <img
-                        src="{{ Auth::user()->image }}"
+                    data-bs-toggle="dropdown"> <img src="{{ Auth::user()->image }}"
                         class="user-image rounded-circle shadow" alt="User Image"> <span
                         class="d-none d-md-inline">{{ Auth::user()->name }}</span> </a>
                 <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-end"> <!--begin::User Image-->
-                    <li class="user-header text-bg-success"> <img
-                            src="{{ Auth::user()->image }}"
+                    <li class="user-header text-bg-success"> <img src="{{ Auth::user()->image }}"
                             class="rounded-circle shadow" alt="User Image">
                         <p>
                             {{ Auth::user()->name }}
                             <small>{{ Auth::user()->email }}</small>
                         </p>
                     </li> <!--end::User Image--> <!--begin::Menu Body-->
-                {{--    <li class="user-body"> <!--begin::Row-->
+                    {{--    <li class="user-body"> <!--begin::Row-->
                          <div class="row">
                             <div class="col-4 text-center"> <a href="#">Followers</a> </div>
                             <div class="col-4 text-center"> <a href="#">Sales</a> </div>
@@ -214,9 +217,10 @@
                     </li> <!--end::Menu Body--> --}}
                     <!--begin::Menu Footer-->
                     <li class="user-footer">
-                        <a href="#" class="btn btn-default btn-flat">{{__('dashboard.layout.profile')}}</a>
-                        <a href="{{ route('logout') }}" class="btn btn-default btn-flat float-end" onclick="event.preventDefault(); disableBackButton(); document.getElementById('logout-form').submit();">
-                            {{__('dashboard.layout.sign_out')}}
+                        <a href="#" class="btn btn-default btn-flat">{{ __('dashboard.layout.profile') }}</a>
+                        <a href="{{ route('logout') }}" class="btn btn-default btn-flat float-end"
+                            onclick="event.preventDefault(); disableBackButton(); document.getElementById('logout-form').submit();">
+                            {{ __('dashboard.layout.sign_out') }}
                         </a>
                     </li>
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">

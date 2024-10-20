@@ -8,11 +8,14 @@ use App\Http\Controllers\Dashboard\Admins\AdminsController;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use App\Http\Controllers\Dashboard\Clients\ClientsController;
 use App\Http\Controllers\Dashboard\Expenses\ExpensesController;
+use App\Http\Controllers\Dashboard\Finances\FinancesController;
 use App\Http\Controllers\Dashboard\Invoices\InvoicesController;
 use App\Http\Controllers\Dashboard\Products\ProductsController;
 use App\Http\Controllers\Dashboard\Suppliers\SuppliersController;
 use App\Http\Controllers\Dashboard\Categories\CategoriesController;
 use App\Http\Controllers\Dashboard\Collections\CollectionsController;
+use App\Http\Controllers\Dashboard\Notifications\NotificationController;
+use App\Http\Controllers\Dashboard\AccountStatement\AccountStatementController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -47,9 +50,10 @@ Route::group(
 
 
 
-        Route::group(['prefix' => 'dashboard', 'middleware' => 'auth'], function () {
-            // Route::group(['prefix' => 'dashboard'], function () {
+        // Route::group(['prefix' => 'dashboard', 'middleware' => 'auth'], function () {
+            Route::group(['prefix' => 'dashboard'], function () {
             Route::get('/', [App\Http\Controllers\HomeController::class, 'dashboard'])->name('dashboard');
+            Route::get('/notifications/{id}', [NotificationController::class, 'read'])->name('markAsRead');
             Route::group(['prefix' => 'representatives'], function () {
                 Route::get('/', [UserController::class, 'index'])->name('representatives.index');;
                 Route::post('/store', [UserController::class, 'store'])->name('representatives.store');
@@ -113,6 +117,18 @@ Route::group(
             Route::group(['prefix' => 'expenses'], function () {
                 Route::get('/', [ExpensesController::class, 'index'])->name('expenses.index');
                 Route::delete('/{expense}', [ExpensesController::class, 'destroy'])->name('expenses.delete');
+            });
+
+            // AccountStatement routs ---------------------------------------------------------------------------------------------------------
+            Route::group(['prefix' => 'statement'], function () {
+                Route::get('/', [AccountStatementController::class, 'index'])->name('statement.index');
+                Route::post('/{client}', [AccountStatementController::class, 'show'])->name('statement.show');
+            });
+
+            // Finances routs ---------------------------------------------------------------------------------------------------------
+            Route::group(['prefix' => 'finances'], function () {
+                Route::get('/', [FinancesController::class, 'index'])->name('finances.index');
+                Route::post('/', [FinancesController::class, 'show'])->name('finances.show');
             });
         });
     }

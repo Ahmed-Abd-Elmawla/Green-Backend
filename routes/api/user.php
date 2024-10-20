@@ -27,6 +27,7 @@ Route::middleware('current_locale')->group(function () {
     // Clients EndPoints ----------------------------------------------------------------------------------------------------
     Route::group(['prefix' => 'clients', 'middleware' => 'auth:user'], function () {
         Route::get('/', [ClientsController::class, 'index']);
+        Route::get('/list', [ClientsController::class, 'miniIndex']);
         Route::get('/{client}', [ClientsController::class, 'show']);
         Route::post('/', [ClientsController::class, 'store']);
     });

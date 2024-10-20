@@ -89,7 +89,7 @@
         }
 
         .custom-pagination .page-item a {
-            color: #198754 !important;
+            color: #198754;
             ;
         }
 
@@ -179,6 +179,22 @@
                 padding: 0.9em 1.8em;
             }
         }
+
+        .activee a {
+            background-color: #198754 !important;
+            border-color: #198754 !important;
+                        color: #fff !important;
+        }
+
+        /* .active>.page-link, .page-link.activee {
+            background-color: #198754 !important;
+            border-color: #198754 !important;
+            color: #fff;
+        }
+
+.activee a {
+            color: #fff !important;
+        } */
     </style>
 </head> <!--end::Head--> <!--begin::Body-->
 

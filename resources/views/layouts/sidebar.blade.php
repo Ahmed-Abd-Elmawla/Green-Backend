@@ -107,6 +107,24 @@
                     </a>
                 </li>
 
+                <li class="nav-item"> <a href="{{ route('statement.index') }}"
+                    class="nav-link {{ request()->routeIs('statement.index') ? 'active' : '' }}">
+                    <i class="nav-icon fa-solid fa-chart-bar"></i>
+                    <p>
+                        {{ __('dashboard.account.account_statement') }}
+                    </p>
+                </a>
+            </li>
+
+            <li class="nav-item"> <a href="{{ route('finances.index') }}"
+                class="nav-link {{ request()->routeIs('finances.index') ? 'active' : '' }}">
+                <i class="nav-icon fa-solid fa-filter-circle-dollar"></i>
+                <p>
+                    {{ __('dashboard.finances.finances') }}
+                </p>
+            </a>
+        </li>
+
 
 
 

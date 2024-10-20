@@ -3,13 +3,14 @@
 namespace App\Http\Controllers\Api\User\Expenses;
 
 use Throwable;
-use App\Traits\Response;
 use App\Models\Expense;
+use App\Traits\Response;
 use Illuminate\Http\Request;
+use App\Helpers\sendNotification;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
-use App\Http\Resources\Api\User\Expenses\ExpenseResource;
 use App\Http\Requests\Api\User\Expenses\ExpenseRequest;
+use App\Http\Resources\Api\User\Expenses\ExpenseResource;
 
 
 class ExpensesController extends Controller
@@ -42,6 +43,7 @@ class ExpensesController extends Controller
             $expense = Expense::create($data);
 
             DB::commit();
+            sendNotification::newExpenseNotify();
             return $this->sendResponse(200, __('api.invoice.expense_successfully_created'), ExpenseResource::make($expense), 200);
         } catch (Throwable $e) {
             DB::rollBack();

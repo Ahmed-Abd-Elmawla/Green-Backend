@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\User\AccountStatement;
 
+use Carbon\Carbon;
 use App\Models\Client;
 use App\Models\Invoice;
 use App\Traits\Response;
@@ -16,18 +17,30 @@ class AccountStatementController extends Controller
     use Response;
     public function index(Request $request,Client $client)
     {
+        $type = $request->type;
         $startDate = $request->start_date;
         $endDate = $request->end_date;
 
-        $collections = Collection::where('client_id', '=', $client->id)
-            ->when($startDate && $endDate, function ($query) use ($startDate, $endDate) {
-                return $query->whereBetween('created_at', [$startDate, $endDate]);
-            })->get();
+        $collections = collect([]);
+        $invoices = collect([]);
 
-        $invoices = Invoice::where('client_id', '=', $client->id)
-            ->when($startDate && $endDate, function ($query) use ($startDate, $endDate) {
-                return $query->whereBetween('created_at', [$startDate, $endDate]);
-            }) ->get();
+        if ($type === 'all' || $type === 'collections') {
+            $collections = Collection::where('client_id', '=', $client->id)
+                ->when($startDate && $endDate, function ($query) use ($startDate, $endDate) {
+                    $start = Carbon::parse($startDate)->startOfDay();
+                    $end = Carbon::parse($endDate)->endOfDay();
+                    return $query->whereBetween('created_at', [$start, $end]);
+                })->get();
+        }
+
+        if ($type === 'all' || $type === 'invoices') {
+            $invoices = Invoice::where('client_id', '=', $client->id)
+                ->when($startDate && $endDate, function ($query) use ($startDate, $endDate) {
+                    $start = Carbon::parse($startDate)->startOfDay();
+                    $end = Carbon::parse($endDate)->endOfDay();
+                    return $query->whereBetween('created_at', [$start, $end]);
+                })->get();
+        }
 
 
         $merge = $collections->merge($invoices);

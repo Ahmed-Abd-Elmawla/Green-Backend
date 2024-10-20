@@ -4,17 +4,18 @@ namespace App\Http\Controllers\Api\User\Invoices;
 
 use Throwable;
 use App\Models\Client;
-use App\Traits\Response;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use App\Http\Controllers\Controller;
-use App\Http\Requests\Api\User\Invoices\InvoiceRequest;
-use App\Http\Resources\Api\User\Invoices\InvoicesResource;
-use App\Http\Resources\Api\User\Invoices\InvoicesMiniResource;
 use App\Models\Invoice;
 use App\Models\Product;
-
+use App\Traits\Response;
+use Illuminate\Http\Request;
+use App\Helpers\sendNotification;
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
 use function PHPUnit\Framework\isEmpty;
+use App\Http\Requests\Api\User\Invoices\InvoiceRequest;
+
+use App\Http\Resources\Api\User\Invoices\InvoicesResource;
+use App\Http\Resources\Api\User\Invoices\InvoicesMiniResource;
 
 class InvoicesController extends Controller
 {
@@ -76,6 +77,7 @@ class InvoicesController extends Controller
             self::updateClient($client, $request);
 
             DB::commit();
+            sendNotification::newInvoiceNotify();
             return $this->sendResponse(200, __('api.invoice.successfully_created'), InvoicesResource::make($invoice), 200);
         } catch (Throwable $e) {
             DB::rollBack();

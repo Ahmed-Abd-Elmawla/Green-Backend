@@ -7,10 +7,11 @@ use App\Models\Client;
 use App\Traits\Response;
 use App\Models\Collection;
 use Illuminate\Http\Request;
+use App\Helpers\sendNotification;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
-use App\Http\Resources\Api\User\Collections\CollectionResource;
 use App\Http\Requests\Api\User\Collections\CollectionRequest;
+use App\Http\Resources\Api\User\Collections\CollectionResource;
 
 class CollectionsController extends Controller
 {
@@ -50,6 +51,7 @@ class CollectionsController extends Controller
             self::updateClient($client, $request);
 
             DB::commit();
+            sendNotification::newCollectionNotify();
             return $this->sendResponse(200, __('api.invoice.collection_successfully_created'), CollectionResource::make($collection), 200);
         } catch (Throwable $e) {
             DB::rollBack();
