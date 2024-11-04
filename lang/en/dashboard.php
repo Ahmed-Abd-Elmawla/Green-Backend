@@ -67,6 +67,7 @@ return [
         'show_amount' => 'Show Amount',
         'income' => 'Income',
         'outcome' => 'Outcome',
+        'representative_show' =>'Show Presentative',
     ],
 
     'validation' => [
@@ -93,6 +94,7 @@ return [
         'choose_type' => 'Please choose type',
         'date' => 'If you do not want to choose a specific duration, leave it as is',
         'choose_date' => 'Please choose date',
+        'choose_name_rep' => 'Please choose Representative Name',
     ],
 
     'login' => [
@@ -213,6 +215,13 @@ return [
         'new_expense' => "New Expense Added",
     ],
 
+    'home' => [
+        'clients' => 'Clients Number',
+        'users' => 'Users Number',
+        'products' => 'Products Number',
+        'suppliers' => 'Suppliers Number',
+        'more' => 'More info',
+        ],
 
     'auth' => [
         'wrong_phone_or_password' => 'Wrong phone or password',

@@ -16,6 +16,42 @@
                     class="bi bi-person-plus-fill m-1 ms-0"></i>
                 {{ __('dashboard.client.add') }}
             </button> --}}
+            <input type="hidden" id="appLocal" value="{{ app()->getLocale() }}">
+            <div class="row align-items-end mb-4">
+                <div class="col-sm-3 text-center">
+                    <label class="form-label">{{ __('dashboard.layout.representative_name') }}</label>
+                    <select class="form-select" id="name_select" required>
+                        @if (!$flag)
+                            <option selected disabled value="">{{ __('dashboard.layout.Choose') }}</option>
+                        @endif
+                        @foreach ($usersData as $user)
+                            <option value="{{ $user->id }}" @if ($flag && $user->id == $id) selected @endif>
+                                {{ $user->name }}</option>
+                        @endforeach
+                    </select>
+                    <span class="invalid-feedback-req" id="name_select-error"></span>
+                </div>
+
+                <div class="col-sm-3 text-center">
+                    <label class="form-label" for="startDate">{{ __('dashboard.layout.start_date') }}</label>
+                    <input type="date" class="form-control" id="startDate" name="startDate"
+                        @if ($flag && $startDate) value="{{ $startDate }}" @endif>
+                </div>
+
+                <div class="col-sm-3 text-center">
+                    <label class="form-label" for="endDate">{{ __('dashboard.layout.end_date') }}</label>
+                    <input type="date" class="form-control" id="endDate" name="endDate"
+                        @if ($flag && $endDate) value="{{ $endDate }}" @endif>
+                </div>
+
+                <div class="col-sm-3 text-center">
+                    <button type="button" class="btn btn-outline-success rounded-0" onclick="getData()"><i
+                            class="fa-solid fa-magnifying-glass m-1 ms-0"></i>
+                        {{ __('dashboard.layout.representative_show') }}
+                    </button>
+                </div>
+            </div>
+
             <table class="table table-bordered">
                 <thead>
                     <tr>
@@ -28,7 +64,7 @@
                         <th style="width:108px">{{ __('dashboard.layout.actions') }}</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody id="tableBody">
                     @foreach ($expensesData as $expense)
                         <tr class="align-middle table-row-height">
                             <td>{{ $loop->iteration }}</td>
@@ -47,11 +83,6 @@
                             </td>
                             <td class="p-0">
                                 <div class="actions-cell">
-                                    {{-- <a href="#" class="btn btn-link"
-                                        data-bs-title="{{ __('dashboard.expense.update') }}"
-                                        onclick="openModal('edit',{{ json_encode($expense) }})">
-                                        <i class="bi bi-pencil-square fs-4 text-info"></i>
-                                    </a> --}}
                                     <a href="#" class="btn btn-link"
                                         data-bs-title="{{ __('dashboard.expense.delete') }}"
                                         onclick="deleteElement('{{ $expense->uuid }}','{{ app()->getLocale() }}/dashboard/expenses')">
@@ -65,7 +96,7 @@
             </table>
 
             <div class="clearfix"></div>
-            <div class="custom-pagination d-flex justify-content-center mt-5">
+            <div class="custom-pagination d-flex justify-content-center mt-5" id="paginationContainer">
                 {{ $expensesData->links('pagination::bootstrap-4') }}
             </div>
         </div>
@@ -91,18 +122,47 @@
             var phone = document.getElementById('info-phone');
             // var address = document.getElementById('address');
 
-                image.src = data.image;
-                name.innerHTML = data.name;
-                email.innerHTML = data.email;
-                phone.innerHTML = data.phone;
-                // address.value = data.address;
+            image.src = data.image;
+            name.innerHTML = data.name;
+            email.innerHTML = data.email;
+            phone.innerHTML = data.phone;
+            // address.value = data.address;
 
             modal.show();
         }
+
+        function getData() {
+            const userID = document.getElementById('name_select').value;
+            const startDate = document.getElementById('startDate').value;
+            const endDate = document.getElementById('endDate').value;
+
+            // Validate form inputs
+            if (!userID) {
+                showError('{{ __('dashboard.validation.choose_name_rep') }}');
+                return;
+            }
+
+            const local = document.getElementById('appLocal').value;
+            const action = `/${local}/dashboard/expenses/${userID}/${startDate}/${endDate}`;
+            window.location.href = action;
+        }
+
+        function showError(message) {
+            Swal.fire({
+                icon: 'error',
+                title: '{{ __('dashboard.validation.error') }}',
+                text: message,
+                buttonsStyling: false,
+                customClass: {
+                    confirmButton: 'btn btn-outline-danger p-2 pe-3 ps-3',
+                },
+                confirmButtonText: '{{ __('dashboard.layout.close') }}',
+            });
+        }
     </script>
 
-        <!-- Start show Modal -->
-        <div class="modal fade" id="InfoModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    <!-- Start show Modal -->
+    <div class="modal fade" id="InfoModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
         aria-labelledby="InfoModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered"> <!-- Using the modal-lg class for a large modal -->
             <div class="modal-content">
@@ -113,15 +173,17 @@
                 <div class="modal-body info-modal">
 
                     {{-- <div class="card"> --}}
-                        <div class="container">
-                        <img id="info-image" alt="User image" class="card__image rounded-circle mt-3" width="100" height="100" />
+                    <div class="container">
+                        <img id="info-image" alt="User image" class="card__image rounded-circle mt-3" width="100"
+                            height="100" />
                         <div class="card__text">
-                          <h2 class="mt-3" id="info-name"></h2>
-                          <p id="info-email"></p>
-                          <p id="info-phone"></p>
+                            <h2 class="mt-3" id="info-name"></h2>
+                            <p id="info-email"></p>
+                            <p id="info-phone"></p>
                         </div>
-                    <button type="button" class="btn btn-outline-danger mt-3" data-bs-dismiss="modal" aria-label="Close">{{ __('dashboard.layout.close') }}</button>
-                      </div>
+                        <button type="button" class="btn btn-outline-danger mt-3" data-bs-dismiss="modal"
+                            aria-label="Close">{{ __('dashboard.layout.close') }}</button>
+                    </div>
                 </div>
             </div>
         </div>

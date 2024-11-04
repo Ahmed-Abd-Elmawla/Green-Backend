@@ -50,9 +50,9 @@ Route::group(
 
 
 
-        // Route::group(['prefix' => 'dashboard', 'middleware' => 'auth'], function () {
-            Route::group(['prefix' => 'dashboard'], function () {
-            Route::get('/', [App\Http\Controllers\HomeController::class, 'dashboard'])->name('dashboard');
+        Route::group(['prefix' => 'dashboard', 'middleware' => 'auth'], function () {
+            // Route::group(['prefix' => 'dashboard'], function () {
+            Route::get('/', [App\Http\Controllers\Dashboard\Home\HomeController::class, 'index'])->name('dashboard');
             Route::get('/notifications/{id}', [NotificationController::class, 'read'])->name('markAsRead');
             Route::group(['prefix' => 'representatives'], function () {
                 Route::get('/', [UserController::class, 'index'])->name('representatives.index');;
@@ -116,6 +116,7 @@ Route::group(
             // Expenses routs ---------------------------------------------------------------------------------------------------------
             Route::group(['prefix' => 'expenses'], function () {
                 Route::get('/', [ExpensesController::class, 'index'])->name('expenses.index');
+                Route::get('/{id}/{startDate?}/{endDate?}', [ExpensesController::class, 'show'])->name('expenses.show');
                 Route::delete('/{expense}', [ExpensesController::class, 'destroy'])->name('expenses.delete');
             });
 

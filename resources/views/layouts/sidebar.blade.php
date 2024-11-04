@@ -99,7 +99,8 @@
                 </li>
 
                 <li class="nav-item"> <a href="{{ route('expenses.index') }}"
-                        class="nav-link {{ request()->routeIs('expenses.index') ? 'active' : '' }}">
+                        class="nav-link {{ request()->routeIs('expenses.index') ? 'active' : '' }}
+                        {{ request()->routeIs('expenses.show') ? 'active' : '' }}">
                         <i class="nav-icon fa-solid fa-hand-holding-dollar"></i>
                         <p>
                             {{ __('dashboard.expense.expenses') }}

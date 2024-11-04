@@ -67,6 +67,7 @@ return [
         'show_amount' => 'عرض القيمة',
         'income' => 'الدخل',
         'outcome' => 'الصرف',
+        'representative_show' =>'عرض المندوب',
     ],
 
     'validation' => [
@@ -93,6 +94,7 @@ return [
         'choose_type' => 'من فضلك إختر نوع الحركة',
         'date' => 'إذا كنت لا تريد إختيار مدة محددة إتركها كما هي',
         'choose_date' => 'من فضلك إختر التاريخ',
+        'choose_name_rep' => 'من فضلك إختر إسم المندوب',
     ],
 
     'login' => [
@@ -212,6 +214,14 @@ return [
         'new_collection' => "تم إضافة تحصيل جديد",
         'new_expense' => "تم إضافة صرف جديد",
     ],
+
+    'home' => [
+        'clients' => 'عدد العملاء',
+        'users' => 'عدد المندوبين',
+        'products' => 'عدد المنتجات',
+        'suppliers' => 'عدد الموردين',
+        'more' => 'عرض المزيد',
+        ],
 
     'auth' => [
         'wrong_phone_or_password' => 'رقم الهاتف أو كلمة المرور غير صحيح',
