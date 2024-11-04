@@ -186,12 +186,10 @@
                         color: #fff !important;
         }
 
-        /* .active>.page-link, .page-link.activee {
-            background-color: #198754 !important;
-            border-color: #198754 !important;
-            color: #fff;
+        .notification-container {
+            max-height: 325px;
+            overflow-y: auto;
         }
-
 .activee a {
             color: #fff !important;
         } */

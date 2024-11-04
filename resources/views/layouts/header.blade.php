@@ -172,7 +172,7 @@
                         <span class="navbar-badge badge text-bg-danger"><strong>{{ auth()->user()->unreadNotifications->count() }}</strong></span>
                     @endif
                 </a>
-                <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end">
+                <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end notification-container">
                     @if (auth()->user()->unreadNotifications->count() == 0)
                         <span class="dropdown-item dropdown-header">{{ __('dashboard.notification.no_notify') }}</span>
                     @else
